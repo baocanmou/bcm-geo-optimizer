@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" role="img" aria-label="BCM GEO workflow: measure, change, retest the same panel">
+<rect x="0" y="0" width="1200" height="470" rx="20" fill="#faf8f3"/>
+<defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#111111"/></marker></defs>
+<text x="18" y="58" font-size="24" font-weight="700" fill="#111111">BCM GEO workflow: measure, change, retest the same panel</text>
+<rect x="16" y="96" width="154" height="262" rx="14" fill="#ffffff" stroke="#e4e0d5" stroke-width="1.5"/>
+<circle cx="42" cy="126" r="14" fill="#111111"/>
+<text x="42" y="131" font-size="14" font-weight="700" fill="#ffd900" text-anchor="middle">1</text>
+<text x="32" y="172" font-size="16" font-weight="700" fill="#111111">Define the</text>
+<text x="32" y="196" font-size="16" font-weight="700" fill="#111111">decision</text>
+<text x="32" y="238" font-size="11.5" fill="#686860">Who chooses what,</text>
+<text x="32" y="258" font-size="11.5" fill="#686860">which markets and</text>
+<text x="32" y="278" font-size="11.5" fill="#686860">systems, what counts</text>
+<line x1="172" y1="227.0" x2="181" y2="227.0" stroke="#111111" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="184" y="96" width="154" height="262" rx="14" fill="#ffd900" stroke="#111111" stroke-width="2"/>
+<circle cx="210" cy="126" r="14" fill="#111111"/>
+<text x="210" y="131" font-size="14" font-weight="700" fill="#ffd900" text-anchor="middle">2</text>
+<text x="200" y="172" font-size="16" font-weight="700" fill="#111111">Freeze prompts,</text>
+<text x="200" y="196" font-size="16" font-weight="700" fill="#111111">take a baseline</text>
+<text x="200" y="238" font-size="11.5" fill="#111111">Provider, locale,</text>
+<text x="200" y="258" font-size="11.5" fill="#111111">region, time, state</text>
+<text x="200" y="278" font-size="11.5" fill="#111111">and shown sources</text>
+<line x1="198" y1="300" x2="324" y2="300" stroke="#111111" stroke-width="1"/>
+<text x="197" y="320" font-size="9.5" font-family="SFMono-Regular, Menlo, Consolas, monospace" fill="#111111">geo_csv_import</text>
+<text x="197" y="338" font-size="9.5" font-family="SFMono-Regular, Menlo, Consolas, monospace" fill="#111111">geo_outcome_scorecard</text>
+<line x1="340" y1="227.0" x2="349" y2="227.0" stroke="#111111" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="352" y="96" width="154" height="262" rx="14" fill="#ffffff" stroke="#e4e0d5" stroke-width="1.5"/>
+<circle cx="378" cy="126" r="14" fill="#111111"/>
+<text x="378" y="131" font-size="14" font-weight="700" fill="#ffd900" text-anchor="middle">3</text>
+<text x="368" y="172" font-size="16" font-weight="700" fill="#111111">Diagnose the</text>
+<text x="368" y="196" font-size="16" font-weight="700" fill="#111111">limiting layer</text>
+<text x="368" y="238" font-size="11.5" fill="#686860">In order: access,</text>
+<text x="368" y="258" font-size="11.5" fill="#686860">index, entity, answers,</text>
+<text x="368" y="278" font-size="11.5" fill="#686860">proof, fit, conversion</text>
+<line x1="508" y1="227.0" x2="517" y2="227.0" stroke="#111111" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="520" y="96" width="154" height="262" rx="14" fill="#ffffff" stroke="#e4e0d5" stroke-width="1.5"/>
+<circle cx="546" cy="126" r="14" fill="#111111"/>
+<text x="546" y="131" font-size="14" font-weight="700" fill="#ffd900" text-anchor="middle">4</text>
+<text x="536" y="172" font-size="16" font-weight="700" fill="#111111">Queue evidence-</text>
+<text x="536" y="196" font-size="16" font-weight="700" fill="#111111">linked actions</text>
+<text x="536" y="238" font-size="11.5" fill="#686860">P0–P3 classes,</text>
+<text x="536" y="258" font-size="11.5" fill="#686860">acceptance check</text>
+<text x="536" y="278" font-size="11.5" fill="#686860">and rollback each</text>
+<line x1="534" y1="318" x2="660" y2="318" stroke="#e4e0d5" stroke-width="1"/>
+<text x="533" y="338" font-size="9.5" font-family="SFMono-Regular, Menlo, Consolas, monospace" fill="#111111">geo_action_prioritizer</text>
+<line x1="676" y1="227.0" x2="685" y2="227.0" stroke="#111111" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="688" y="96" width="154" height="262" rx="14" fill="#ffffff" stroke="#e4e0d5" stroke-width="1.5"/>
+<circle cx="714" cy="126" r="14" fill="#111111"/>
+<text x="714" y="131" font-size="14" font-weight="700" fill="#ffd900" text-anchor="middle">5</text>
+<text x="704" y="172" font-size="16" font-weight="700" fill="#111111">Release</text>
+<text x="704" y="196" font-size="16" font-weight="700" fill="#111111">under a gate</text>
+<text x="704" y="238" font-size="11.5" fill="#686860">Backup, authorization,</text>
+<text x="704" y="258" font-size="11.5" fill="#686860">origin, edge and</text>
+<text x="704" y="278" font-size="11.5" fill="#686860">rendered checks</text>
+<line x1="844" y1="227.0" x2="853" y2="227.0" stroke="#111111" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="856" y="96" width="154" height="262" rx="14" fill="#ffd900" stroke="#111111" stroke-width="2"/>
+<circle cx="882" cy="126" r="14" fill="#111111"/>
+<text x="882" y="131" font-size="14" font-weight="700" fill="#ffd900" text-anchor="middle">6</text>
+<text x="872" y="172" font-size="16" font-weight="700" fill="#111111">Retest the</text>
+<text x="872" y="196" font-size="16" font-weight="700" fill="#111111">same panel</text>
+<text x="872" y="238" font-size="11.5" fill="#111111">Match prompt hash,</text>
+<text x="872" y="258" font-size="11.5" fill="#111111">provider and region;</text>
+<text x="872" y="278" font-size="11.5" fill="#111111">Wilson intervals</text>
+<line x1="870" y1="318" x2="996" y2="318" stroke="#111111" stroke-width="1"/>
+<text x="869" y="338" font-size="9.5" font-family="SFMono-Regular, Menlo, Consolas, monospace" fill="#111111">geo_delta_compare</text>
+<line x1="1012" y1="227.0" x2="1021" y2="227.0" stroke="#111111" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="1024" y="96" width="154" height="262" rx="14" fill="#ffffff" stroke="#e4e0d5" stroke-width="1.5"/>
+<circle cx="1050" cy="126" r="14" fill="#111111"/>
+<text x="1050" y="131" font-size="14" font-weight="700" fill="#ffd900" text-anchor="middle">7</text>
+<text x="1040" y="172" font-size="16" font-weight="700" fill="#111111">Gate the</text>
+<text x="1040" y="196" font-size="16" font-weight="700" fill="#111111">claims</text>
+<text x="1040" y="238" font-size="11.5" fill="#686860">Implementation vs.</text>
+<text x="1040" y="258" font-size="11.5" fill="#686860">outcome vs. change</text>
+<text x="1040" y="278" font-size="11.5" fill="#686860">vs. causal estimate</text>
+<line x1="1038" y1="318" x2="1164" y2="318" stroke="#e4e0d5" stroke-width="1"/>
+<text x="1037" y="338" font-size="9.5" font-family="SFMono-Regular, Menlo, Consolas, monospace" fill="#111111">geo_claim_gate</text>
+<path d="M1101.0,360 V388 H429.0 V366" fill="none" stroke="#111111" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+<rect x="575.0" y="377" width="380" height="24" rx="12" fill="#faf8f3"/>
+<text x="765.0" y="394" font-size="13" fill="#111111" text-anchor="middle">Keep failures, nulls and negatives in the next round</text>
+<text x="18" y="442" font-size="13" fill="#686860">The scripts validate and aggregate the observations you supply. They do not browse, generate evidence, or infer causality.</text>
+</svg>

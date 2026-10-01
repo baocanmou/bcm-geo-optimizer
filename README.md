@@ -1,92 +1,67 @@
-# BCM GEO Outcome Engine
+<p align="center">
+  <img src="assets/cover.png" alt="BCM GEO Outcome Engine (GEO 效果优化)" width="100%">
+</p>
 
-[![CI](https://github.com/yht0912/bcm-geo-optimizer/actions/workflows/ci.yml/badge.svg)](https://github.com/yht0912/bcm-geo-optimizer/actions/workflows/ci.yml)
+# BCM GEO Outcome Engine（GEO 效果优化）
+
+[简体中文（主文档）](README.zh-CN.md) · **English**
+
+> 中文读者请直接阅读 [简体中文说明](README.zh-CN.md)：内容与本页对等，国内可从 [Gitee 镜像](https://gitee.com/baocanmou/bcm-geo-optimizer) 克隆。
+
+[![CI](https://github.com/baocanmou/bcm-geo-optimizer/actions/workflows/ci.yml/badge.svg)](https://github.com/baocanmou/bcm-geo-optimizer/actions/workflows/ci.yml)
 [![Version](https://img.shields.io/badge/version-1.3.0-2563eb)](VERSION)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Zero dependencies](https://img.shields.io/badge/runtime-dependencies-0-16a34a)](scripts)
+[![Gitee mirror](https://img.shields.io/badge/Gitee-China%20mirror-c71d23)](https://gitee.com/baocanmou/bcm-geo-optimizer)
 
-An outcome-first **Generative Engine Optimization (GEO) Skill** for AI citations, recommendations, search visibility, and attributable growth.
+A Generative Engine Optimization (GEO) Skill for Codex, Claude Code and compatible coding agents. It helps brand owners, marketers and agencies find out whether a brand is actually mentioned, cited or recommended in AI answers and search results, turns those observations into evidence-ranked improvement tasks, and retests the same prompts to see what changed.
 
-BCM GEO Outcome Engine helps Codex, Claude, and compatible agents answer the question most GEO tools avoid:
+It answers one question:
 
 > Did the work produce an externally observable mention, citation, recommendation, qualified visit, lead, or sale?
 
-[中文说明](README.zh-CN.md) · [Skill instructions](SKILL.md) · [Evidence contract](references/evidence-contract.md)
+## Who it is for and when to use it
 
-## Why this Skill exists
+- **You shipped `llms.txt`, structured data and URL submissions, and AI still does not recommend you**: find the layer that is actually blocking before deciding what to change.
+- **You are starting a GEO project**: build a baseline with a fixed prompt panel across ChatGPT, Gemini, Perplexity, Google, Bing, Baidu and other observable systems, then plan 30/60/90-day work.
+- **You redesigned pages or published content and want to know whether anything changed**: retest the same prompts, compare matched samples only, and keep observed change separate from causality.
+- **You need to report GEO results to a client or manager, or publish a case study**: run the claim gate first to check whether each statement has enough evidence.
 
-Technical checks matter, but they are not the outcome. A successful crawl, sitemap submission, schema deployment, audit score, or `llms.txt` response does not prove that an AI system cited or recommended a brand.
+## What it does
 
-This Skill enforces a verifiable evidence ladder:
+At the core is an evidence ladder. It reports the highest directly verified state and never skips a step by inference:
 
 ```text
 reachable -> discovered -> crawled -> indexed -> ranked
           -> mentioned -> cited -> recommended -> converted
 ```
 
-It reports the highest observed state without skipping steps.
+- **Separates implementation from outcomes**: HTTP 200, a submission receipt, a live `llms.txt` or a high audit score are implementation signals, not indexing or AI adoption.
+- **Fixed prompt panel**: category discovery, comparison, problem/solution, trust and proof, local, branded verification and negative-risk prompts; every observation records provider, model, locale, region, time, state, sources actually shown, and limitations.
+- **Layer-by-layer diagnosis**: access and discovery, indexing and retrieval, entity clarity, answerability, independent corroboration, recommendation fit, conversion continuity, stopping at the highest blocker.
+- **Evidence-linked actions**: each task states the observed gap, evidence, target state, acceptance check, owner, risk and rollback, classed P0–P3, with no composite "GEO score".
+- **Controlled release**: for live-site changes, backup, smallest scoped change, origin, public edge, rendered DOM, receipts, monitoring and rollback are checked separately; an audit request does not authorize changes.
+- **Matched retest**: comparisons require the same prompt hash, provider, locale and region; outputs mention, citation, recommendation and negative rates with Wilson 95% intervals and flag small samples as directional.
+- **Claim gate**: conclusions are typed as implementation, search outcome, AI outcome, observed change or causal estimate, each with its own evidence threshold.
+- **Multi-site governance**: one preferred site and page per commercial intent, to avoid your own sites competing for the same query.
+- **Multilingual diagnostics**: Chinese and other languages are evaluated with locale-aware rules, not English word-count or capitalization heuristics.
+- **Authorized browser evidence** (v1.3.0): AI answers captured in a signed-in browser you authorized must record the collection method, capture reference and SHA-256 of the original file; captchas, logins, submissions, uploads and account settings are handed back to you.
+- **Offline scripts**: six deterministic Python scripts, standard library only, no API keys, no network calls.
 
-## What makes it different
+## Example
 
-- **Recommendation outcome loop:** baseline, diagnose, release, discovery window, matched retest, attribution.
-- **No self-scoring as success:** internal readiness can guide work but cannot prove external visibility.
-- **Matched prompt measurement:** provider, locale, region, and exact prompt hash must align.
-- **Honest uncertainty:** unavailable, negative, missing, and conflicting evidence remain visible.
-- **Search + AI coverage:** Google, Bing, Baidu, ChatGPT, Claude, Gemini, Copilot, Perplexity, and other observable systems.
-- **Multi-site governance:** one preferred property/page per intent, with cannibalization controls.
-- **Production safety:** backup, origin, edge, rendered DOM, receipt, monitoring, and rollback checks.
-- **Conversion continuity:** recommendation visibility connects to qualified visits and business outcomes only when tracking is verified.
-- **Offline deterministic tools:** no API keys, no hidden network calls, and zero runtime dependencies.
-- **Portable evidence data:** strict CSV import, versioned JSON Schemas, and privacy-aware case export.
-- **Claim publication gate:** implementation, outcome, observed-change, and causal claims have different evidence requirements.
-- **Multilingual integrity:** locale-aware diagnostics replace universal English-only word-count or capitalization heuristics.
-- **Authorized browser evidence:** authenticated observations retain collection method, governed capture reference, and SHA-256 integrity without being promoted to outcome proof.
+Everything in the figure comes from the synthetic example files in this repository ([`evidence-baseline.json`](examples/evidence-baseline.json), [`evidence-retest.json`](examples/evidence-retest.json), [`actions-sample.json`](examples/actions-sample.json), [`outcome-claims-sample.json`](examples/outcome-claims-sample.json)). The numbers were computed by the repository scripts and do not describe any real provider.
 
-## Install
+![Example data: evidence-ladder positions of six prompts at baseline and retest, matched-sample metrics, the action queue and the claim-gate decision](assets/example-retest.en.png)
 
-Clone the repository into your shared agent skills directory:
+How to read it:
 
-```bash
-git clone https://github.com/yht0912/bcm-geo-optimizer.git \
-  "$HOME/.agents/skills/bcm-geo-optimizer"
-```
+- Of six prompts, `local-choice` had no valid answer at baseline and is excluded from the denominator, leaving 5 valid pairs.
+- Across those 5 pairs, recommendations went from 0/5 to 2/5 and citations from 1/5 to 3/5. The Wilson intervals are wide and the script emits `small_matched_sample_directional_only`, so this is directional only.
+- The action queue puts "repair a conflicting canonical" (P0, discovery) ahead of "add an evidence unit to a key claim" (P1). "Test a machine-readable helper" has evidence strength 0.25 and comes last, as a bounded experiment.
+- The claim "recommendation rate increased in the matched panel" has confidence 0.7, so the gate returns `qualified`: you may report an observed change, together with its limitations (synthetic data, no causality).
 
-If your agent reads a different skills directory, link the shared copy:
-
-```bash
-ln -s "$HOME/.agents/skills/bcm-geo-optimizer" \
-  "$HOME/.codex/skills/bcm-geo-optimizer"
-```
-
-Start a new agent session after installation so the Skill catalog refreshes.
-
-## Use
-
-Ask naturally or invoke the Skill explicitly:
-
-```text
-Use $bcm-geo-optimizer to establish a baseline across ChatGPT, Gemini,
-Perplexity, Google, and Bing, then produce an evidence-backed 90-day plan.
-```
-
-```text
-Use $bcm-geo-optimizer to compare our baseline and retest prompt panels.
-Report only matched observations and do not claim causality.
-```
-
-The Skill first defines the commercial decision and stable prompt panel, then diagnoses the highest limiting layer before proposing work.
-
-## Evidence tools
-
-Create a scorecard from observed evidence:
-
-```bash
-python3 scripts/geo_outcome_scorecard.py \
-  --input examples/evidence-sample.json \
-  --output /tmp/geo-scorecard.json
-```
-
-Compare a baseline and retest:
+Reproduce it:
 
 ```bash
 python3 scripts/geo_delta_compare.py \
@@ -95,100 +70,178 @@ python3 scripts/geo_delta_compare.py \
   --output /tmp/geo-delta.json
 ```
 
-Build a transparent, constraint-first action queue:
+## Workflow
+
+![BCM GEO workflow: define the decision, freeze prompts and take a baseline, diagnose the limiting layer, queue evidence-linked actions, release under a gate, retest the same panel, gate the claims](assets/workflow.en.svg)
+
+## Install
+
+Clone the repository into your shared agent skills directory:
 
 ```bash
+git clone https://github.com/baocanmou/bcm-geo-optimizer.git \
+  "$HOME/.agents/skills/bcm-geo-optimizer"
+```
+
+From mainland China, the Gitee mirror is usually faster:
+
+```bash
+git clone https://gitee.com/baocanmou/bcm-geo-optimizer.git \
+  "$HOME/.agents/skills/bcm-geo-optimizer"
+```
+
+**Codex**: if Codex reads a separate skills directory, link the shared copy:
+
+```bash
+mkdir -p "$HOME/.codex/skills"
+ln -s "$HOME/.agents/skills/bcm-geo-optimizer" \
+  "$HOME/.codex/skills/bcm-geo-optimizer"
+```
+
+**Claude Code**: Claude Code reads personal skills from `~/.claude/skills/`; link it the same way:
+
+```bash
+mkdir -p "$HOME/.claude/skills"
+ln -s "$HOME/.agents/skills/bcm-geo-optimizer" \
+  "$HOME/.claude/skills/bcm-geo-optimizer"
+```
+
+Start a new agent session after installation so the skill catalog refreshes. The scripts need only Python 3 (CI covers 3.10–3.13) and have no third-party dependencies.
+
+## Usage
+
+Describe the task in plain language, or invoke the Skill by name (`$bcm-geo-optimizer` in Codex, `/bcm-geo-optimizer` in Claude Code).
+
+```text
+Use $bcm-geo-optimizer to establish a baseline across ChatGPT, Gemini,
+Perplexity, Google, Bing and Baidu, then produce a 90-day plan with acceptance checks.
+```
+
+```text
+Use $bcm-geo-optimizer to compare our baseline and retest prompt panels.
+Report only matched observations and do not claim causality.
+```
+
+```text
+Use $bcm-geo-optimizer with huashu-chrome to build an AI recommendation baseline
+for a fixed set of short queries in my authorized browser. Hand control back to me
+for any captcha, submission, upload or account setting, and hash every original capture.
+```
+
+The agent first confirms the commercial target and prompt panel, then diagnoses the limiting layer, and returns a report covering: business target and scope, verified state by engine and site, baseline panel and coverage gaps, top blockers, 30/60/90-day actions, release status (if authorized), retest result, and the next decision. States are labeled `Verified`, `Received`, `Configured`, `Inferred`, `Unknown` or `Blocked`.
+
+For browser collection, see [authorized browser observation](references/browser-observation.md).
+
+### Offline evidence tools
+
+| Script | Purpose |
+|---|---|
+| `geo_outcome_scorecard.py` | Summarize observations into an outcome scorecard |
+| `geo_delta_compare.py` | Compare baseline and retest using matched samples only |
+| `geo_action_prioritizer.py` | Build a transparent, constraint-first action queue |
+| `geo_csv_import.py` | Convert a spreadsheet export into an evidence bundle, rejecting unknown columns |
+| `geo_privacy_export.py` | Produce a de-identified review copy |
+| `geo_claim_gate.py` | Check the evidence threshold of each claim before publication |
+
+```bash
+# Outcome scorecard
+python3 scripts/geo_outcome_scorecard.py \
+  --input examples/evidence-sample.json \
+  --output /tmp/geo-scorecard.json
+
+# Action queue
 python3 scripts/geo_action_prioritizer.py \
   --input examples/actions-sample.json \
   --output /tmp/geo-action-queue.json
-```
 
-Import a spreadsheet export without accepting unknown columns:
-
-```bash
+# CSV import
 python3 scripts/geo_csv_import.py \
   --input examples/evidence-sample.csv \
   --study-id example-study \
   --purpose "Synthetic import check" \
   --output /tmp/geo-evidence.json
-```
 
-Create a deterministic, de-identified review copy:
-
-```bash
+# De-identified copy (salt of 16+ bytes, never committed)
 export GEO_ANONYMIZATION_SALT='use-a-private-random-value-of-16-or-more-bytes'
 python3 scripts/geo_privacy_export.py \
   --input /tmp/geo-evidence.json \
   --time-granularity day \
   --output /tmp/geo-evidence-public.json
-```
 
-Gate outcome claims before publication:
-
-```bash
+# Claim gate
 python3 scripts/geo_claim_gate.py \
   --input examples/outcome-claims-sample.json \
   --output /tmp/geo-claim-gate.json \
   --strict
 ```
 
-The tools validate supplied observations and calculate transparent rates with Wilson 95% intervals. They do not browse, invent evidence, or attribute causality.
+Data contracts: [evidence contract](references/evidence-contract.md), [evidence bundle JSON Schema](schemas/evidence-bundle.schema.json), [action bundle JSON Schema](schemas/action-bundle.schema.json), [outcome claim JSON Schema](schemas/outcome-claim.schema.json), [data interoperability and privacy export](references/data-interoperability.md).
 
-The privacy export reduces disclosure risk but does not guarantee anonymity. Review residual risks before sharing. See [data interoperability and privacy export](references/data-interoperability.md).
+## Boundaries
 
-## Evidence input
+- **It does not collect evidence for you**: the scripts validate and aggregate the observations you supply. They do not contact any provider, generate AI answers, or infer causality.
+- **It does not change live sites or publish**: an audit request is not authorization. Site changes, publishing, outreach and account changes need your separate approval.
+- **No fabrication**: no fake reviews, citations, mentions, backlinks or AI answers, and no circumvention of captchas, rate limits or access controls.
+- **Results that need human review**:
+  - small retest samples are directional only;
+  - causal conclusions need a separate causal design (control, assumptions); the scripts will not produce one for you;
+  - the privacy export reduces disclosure risk but cannot ensure anonymity; review residual risk before sharing;
+  - provider behavior changes, so check current official documentation before acting on engine-specific advice;
+  - one recommendation is not a stable recommendation, and not traffic or a sale.
+- **No production system included**: this repository does not contain the BCM GEO production platform, customer data, private connectors, credentials, internal thresholds, site-specific strategy or hosted services.
 
-Each observation includes a stable prompt ID/hash, provider, model, locale, region, timestamp, outcome state, source URLs, evidence excerpt, and limitations. See the full [evidence contract](references/evidence-contract.md).
+## FAQ
 
-Allowed primary states:
+**We already have `llms.txt` and structured data. Why does AI still not recommend us?**
+Those prove implementation, not that an AI system used them. The Skill diagnoses the limiting layer first; the blocker may be indexing, inconsistent entity facts, pages without citable evidence, or a lack of independent corroboration. `llms.txt` and schema are not automatically ranked as high priority.
 
-- `unavailable`
-- `not_mentioned`
-- `mentioned`
-- `cited`
-- `recommended`
-- `negative`
+**Do the scripts query ChatGPT or scrape search results?**
+No. They run offline, need no keys and make no network calls. Observations come from your own collection, platform exports, or a browser session you authorized.
 
-Examples are synthetic and use `example.com`; they are not provider benchmarks.
+**The retest numbers improved. Can we say the optimization caused it?**
+Only that a change was observed in the matched panel. A causal estimate needs an explicit causal design, a control reference and stated assumptions. Run `geo_claim_gate.py` before publishing; a `causal_estimate` claim without a design is rejected.
 
-Portable contracts:
+**Is a retest with only a few samples meaningful?**
+Yes, as directional evidence. The script reports sample sizes and Wilson intervals and warns on small samples. When matched coverage falls below the default 0.8, the comparison is labeled `insufficient_matched_coverage`.
 
-- [Evidence bundle JSON Schema](schemas/evidence-bundle.schema.json)
-- [Action bundle JSON Schema](schemas/action-bundle.schema.json)
-- [Outcome claim JSON Schema](schemas/outcome-claim.schema.json)
+**Can I contribute code?**
+External source-code contributions are not merged until the maintainer publishes a legally reviewed contribution agreement. Issues, reproducible test cases, localization feedback and design discussion are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md). Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md).
 
-## Verify the package
+## Versions and updates
+
+Current version: **1.3.0** (2026-09-07). It adds the authorized-browser observation contract: collection-method and capture-hash validation, without treating browser execution as outcome proof.
+
+- Change log: [CHANGELOG.md](CHANGELOG.md)
+- Releases: [GitHub Releases](https://github.com/baocanmou/bcm-geo-optimizer/releases)
+
+Self-check:
 
 ```bash
 python3 scripts/validate_package.py
 python3 -m unittest discover -s tests -v
 ```
 
-CI runs package validation, unit tests, and both example workflows on supported Python versions.
+## License and attribution
 
-## Design principles
+BCM's original public implementation is licensed under [MIT](LICENSE). Copyright remains with 南昌包参谋品牌策划有限公司. The MIT License covers the skill instructions, JSON Schemas, deterministic scripts, evaluations, synthetic examples and documentation in this repository. It does not include or license the BCM GEO production platform, customer data, private connectors, credentials, internal thresholds, site-specific strategy, trademarks, logos or hosted services.
 
-1. Real answers and official readback outrank internal scores.
-2. Implementation receipts and outcome evidence are separate.
-3. Changes must map to an observed gap and acceptance check.
-4. Small panels are directional and always report sample size.
-5. Causal claims require a causal design.
-6. GEO must help a real user make a better decision.
-7. Credentials and customer data never belong in the Skill or evidence examples.
+`BCM GEO`, `包参谋`, `包参谋 GEO`, `BCM` and related identities are not licensed as trademarks under MIT. Accurate attribution and factual compatibility statements are permitted; modified or redistributed versions must not imply that BCM operates, approves, certifies or endorses them.
 
-## Independent implementation
+This project was designed and implemented independently around real recommendation outcomes, production verification and business attribution. It does not include source code, prompt text, scoring formulas, documentation text or visual assets copied from other GEO projects.
 
-This repository is an original implementation built from first principles around outcome measurement, production verification, and business attribution. It does not include source code, prompt text, scoring formulas, documentation text, or assets copied from other GEO projects. See the registered [methodology and intellectual-property boundary](references/methodology-and-ip.md).
+See: [Ownership](OWNERSHIP.md) · [Provenance](PROVENANCE.md) · [Methodology and IP boundary](references/methodology-and-ip.md) · [Third-party notices](THIRD_PARTY_NOTICES.md) · [Trademark policy](TRADEMARKS.md) · [NOTICE](NOTICE)
 
-## Contributing and security
+## Other BaoCanMou open-source projects
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for pull requests and [SECURITY.md](SECURITY.md) for private vulnerability reporting. Do not submit credentials, private customer data, live session captures, or unverifiable recommendation claims.
+| Project | What it does | China mirror |
+|---|---|---|
+| [Restaurant Slogans: 10 Methods, 3 Picks](https://github.com/baocanmou/baocanmou-restaurant-slogan) | One restaurant tagline per method from ten masters, then three recommendations | [Gitee](https://gitee.com/baocanmou/baocanmou-restaurant-slogan) |
+| [Plans into Presentations](https://github.com/baocanmou/baocanmou-plan-to-ppt) | Turns briefs and research into an editable, source-checked proposal deck | [Gitee](https://gitee.com/baocanmou/baocanmou-plan-to-ppt) |
+| [Open GEO SEO Console](https://github.com/baocanmou/open-geo-seo-console) | Self-hosted SEO and GEO monitoring console | [Gitee](https://gitee.com/baocanmou/open-geo-seo-console) |
+| [BaoCanMou AI Skill Center](https://github.com/baocanmou/baocanmou-ai-skill-center) | Desktop app that catalogs local AI skills and links them to AI tools | [Gitee](https://gitee.com/baocanmou/baocanmou-ai-skill-center) |
 
-## License
+## About BaoCanMou
 
-BCM's original public implementation is licensed under [MIT](LICENSE).
-Copyright remains with 南昌包参谋品牌策划有限公司; the license does not include
-BCM trademarks, production services, credentials, customer data, or private
-strategy. See [Ownership](OWNERSHIP.md), [Provenance](PROVENANCE.md),
-[third-party notices](THIRD_PARTY_NOTICES.md), and
-[trademark policy](TRADEMARKS.md).
+BaoCanMou (包参谋) — Nanchang BaoCanMou Brand Planning Co., Ltd. — is a brand strategy and design company founded in 2012 in Nanchang, Jiangxi, China. We provide brand positioning, logo and visual identity, packaging, brand space and communication content, mainly for restaurants, chain stores, packaged food and regional specialty brands. Founder: Yi Huiting.
+
+We work positioning first, design second. These tools come from work we repeat in client projects; we write the judgment criteria down so AI can follow the same standard.
