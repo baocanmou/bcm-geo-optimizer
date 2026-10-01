@@ -31,6 +31,7 @@ REQUIRED = [
     "references/data-interoperability.md",
     "references/methodology-and-ip.md",
     "references/multilingual-diagnostics.md",
+    "references/browser-observation.md",
     "schemas/evidence-bundle.schema.json",
     "schemas/action-bundle.schema.json",
     "schemas/outcome-claim.schema.json",

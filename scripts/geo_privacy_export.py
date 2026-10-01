@@ -20,7 +20,7 @@ from typing import Any
 from geo_outcome_scorecard import EvidenceError, load_bundle, validate_observations
 
 
-SCHEMA_VERSION = "1.2.0"
+SCHEMA_VERSION = "1.3.0"
 METHODOLOGY = {
     "id": "bcm-geo-evidence-action-retest",
     "version": "1.0.0",
@@ -86,6 +86,10 @@ def privacy_observation(
         output["capture_ref"] = (
             f"capture-{token(salt, 'capture-ref', row['capture_ref'])}"
         )
+    if row.get("collection_method"):
+        output["collection_method"] = row["collection_method"]
+    if row.get("capture_sha256"):
+        output["capture_sha256"] = row["capture_sha256"]
     return output
 
 

@@ -3,7 +3,7 @@ name: bcm-geo-optimizer
 description: Outcome-first Generative Engine Optimization (GEO) and SEO workflow for improving real brand mentions, citations, recommendations, search visibility, and attributable conversions across AI assistants and search engines. Use when auditing or optimizing websites for ChatGPT, Claude, Gemini, Perplexity, Copilot, Google AI Overviews, Baidu, Bing, Google Search, or other answer/search systems; when measuring AI recommendation visibility; when planning llms.txt, structured data, entity, content, citation, indexing, or multi-site work; or when proving whether GEO changes produced externally observable results.
 license: MIT
 metadata:
-  version: 1.2.0
+  version: 1.3.0
   author: BaoCanMou / 南昌包参谋品牌策划有限公司
   category: marketing
   tags:
@@ -70,6 +70,16 @@ Record for every observation:
 - verbatim evidence excerpt within lawful quotation limits;
 - capture reference, if retained;
 - limitations and confidence.
+
+When evidence is collected through an authorized logged-in browser, also record
+`collection_method=authorized-browser`, a governed `capture_ref`, and the SHA-256
+of the untouched capture. Freeze the prompt before navigation; record the visible
+provider/model, locale and region; preserve unavailable and negative results; and
+never store cookies, tokens, account identifiers or private-page dumps in the
+evidence bundle. Use the least-privilege procedure in
+[references/browser-observation.md](references/browser-observation.md). Browser
+automation proves an observation was captured, not that the provider has stable
+behavior or that an optimization caused it.
 
 Do not compare baseline and retest when the prompt panel, locale, or provider coverage changed materially. See [references/evidence-contract.md](references/evidence-contract.md).
 
@@ -236,6 +246,7 @@ Use these labels consistently:
 - [Engine matrix](references/engine-matrix.md)
 - [Multi-site governance](references/multi-site-governance.md)
 - [Production release](references/production-release.md)
+- [Authorized browser observation](references/browser-observation.md)
 - [Data interoperability and privacy export](references/data-interoperability.md)
 - [Methodology and intellectual-property boundary](references/methodology-and-ip.md)
 - [Multilingual diagnostics](references/multilingual-diagnostics.md)

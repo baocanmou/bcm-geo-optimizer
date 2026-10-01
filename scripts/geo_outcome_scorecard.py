@@ -19,8 +19,8 @@ from typing import Any, Iterable
 from urllib.parse import urlparse
 
 
-SCHEMA_VERSION = "1.2.0"
-SUPPORTED_INPUT_SCHEMA_VERSIONS = {"1.0", "1.0.0", "1.1.0", "1.2.0"}
+SCHEMA_VERSION = "1.3.0"
+SUPPORTED_INPUT_SCHEMA_VERSIONS = {"1.0", "1.0.0", "1.1.0", "1.2.0", "1.3.0"}
 ALLOWED_STATUSES = {
     "unavailable",
     "not_mentioned",
@@ -28,6 +28,12 @@ ALLOWED_STATUSES = {
     "cited",
     "recommended",
     "negative",
+}
+ALLOWED_COLLECTION_METHODS = {
+    "manual",
+    "authorized-browser",
+    "official-api",
+    "public-web",
 }
 REQUIRED_FIELDS = {
     "observation_id",
@@ -140,6 +146,26 @@ def validate_observations(observations: Any) -> None:
             raise EvidenceError(
                 f"observations[{index}].observed_at must include ISO 8601 timezone"
             )
+
+        capture_sha256 = item.get("capture_sha256")
+        if capture_sha256 is not None and not HEX_64.fullmatch(capture_sha256):
+            raise EvidenceError(
+                f"observations[{index}].capture_sha256 must be lowercase SHA-256"
+            )
+
+        collection_method = item.get("collection_method")
+        if collection_method is not None:
+            if collection_method not in ALLOWED_COLLECTION_METHODS:
+                raise EvidenceError(
+                    f"observations[{index}].collection_method must be one of "
+                    f"{sorted(ALLOWED_COLLECTION_METHODS)}"
+                )
+            if collection_method == "authorized-browser":
+                if not item.get("capture_ref") or not capture_sha256:
+                    raise EvidenceError(
+                        f"observations[{index}] authorized-browser requires "
+                        "capture_ref and capture_sha256"
+                    )
 
         urls = item["source_urls"]
         if not isinstance(urls, list) or not all(isinstance(url, str) for url in urls):

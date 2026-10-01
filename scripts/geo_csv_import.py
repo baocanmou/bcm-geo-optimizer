@@ -14,7 +14,7 @@ from typing import Any
 from geo_outcome_scorecard import EvidenceError, validate_observations
 
 
-SCHEMA_VERSION = "1.2.0"
+SCHEMA_VERSION = "1.3.0"
 METHODOLOGY = {
     "id": "bcm-geo-evidence-action-retest",
     "version": "1.0.0",
@@ -37,7 +37,7 @@ REQUIRED_COLUMNS = [
     "evidence_excerpt",
     "limitations",
 ]
-OPTIONAL_COLUMNS = ["capture_ref"]
+OPTIONAL_COLUMNS = ["capture_ref", "collection_method", "capture_sha256"]
 ALLOWED_COLUMNS = set(REQUIRED_COLUMNS + OPTIONAL_COLUMNS)
 
 
@@ -97,6 +97,10 @@ def load_csv(path: Path) -> list[dict[str, Any]]:
             capture_ref = (row.get("capture_ref") or "").strip()
             if capture_ref:
                 item["capture_ref"] = capture_ref
+            for field in ("collection_method", "capture_sha256"):
+                value = (row.get(field) or "").strip()
+                if value:
+                    item[field] = value
             observations.append(item)
 
     try:

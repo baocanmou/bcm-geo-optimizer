@@ -1,7 +1,7 @@
 # BCM GEO Outcome Engine
 
 [![CI](https://github.com/yht0912/bcm-geo-optimizer/actions/workflows/ci.yml/badge.svg)](https://github.com/yht0912/bcm-geo-optimizer/actions/workflows/ci.yml)
-[![Version](https://img.shields.io/badge/version-1.2.0-2563eb)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.3.0-2563eb)](VERSION)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Zero dependencies](https://img.shields.io/badge/runtime-dependencies-0-16a34a)](scripts)
 
@@ -40,6 +40,7 @@ It reports the highest observed state without skipping steps.
 - **Portable evidence data:** strict CSV import, versioned JSON Schemas, and privacy-aware case export.
 - **Claim publication gate:** implementation, outcome, observed-change, and causal claims have different evidence requirements.
 - **Multilingual integrity:** locale-aware diagnostics replace universal English-only word-count or capitalization heuristics.
+- **Authorized browser evidence:** authenticated observations retain collection method, governed capture reference, and SHA-256 integrity without being promoted to outcome proof.
 
 ## Install
 

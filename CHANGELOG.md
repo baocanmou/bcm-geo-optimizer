@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.0 — 2026-09-07
+
+- Added an authorized-browser observation contract for authenticated AI and search interfaces.
+- Added explicit collection-method and capture-hash validation without treating browser execution as outcome proof.
+- Documented a least-privilege huashu-chrome workflow, human-only challenge handling, evidence redaction, and matched-session requirements.
+
 ## 1.2.0 — 2026-09-01
 
 - Registered the independent BCM evidence-action-retest method and its public/protected intellectual-property boundary.

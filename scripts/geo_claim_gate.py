@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any
 
 
-SCHEMA_VERSION = "1.2.0"
+SCHEMA_VERSION = "1.3.0"
 METHOD_ID = "bcm-geo-evidence-action-retest"
 CLAIM_TYPES = {
     "implementation",

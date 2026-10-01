@@ -16,6 +16,11 @@
       "repository": "https://github.com/zubair-trabzada/geo-seo-claude",
       "commit": "a58098a839e2c97df7ae89191b3021fa9e0f88c3",
       "code_imported": false
+    },
+    {
+      "repository": "https://github.com/alchaincyf/huashu-chrome",
+      "commit": "0e114b288a9e5eb100d55e8949efa93f1de4fc53",
+      "code_imported": false
     }
   ],
   "production_material_included": false,

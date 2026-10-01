@@ -54,6 +54,39 @@ class OutcomeScorecardTests(unittest.TestCase):
         with self.assertRaisesRegex(EvidenceError, "duplicate observation_id"):
             validate_observations(rows)
 
+    def test_authorized_browser_requires_capture_integrity(self) -> None:
+        rows = copy.deepcopy(self.baseline)
+        rows[0]["collection_method"] = "authorized-browser"
+        with self.assertRaisesRegex(EvidenceError, "capture_ref and capture_sha256"):
+            validate_observations(rows)
+        rows[0]["capture_ref"] = "governed/capture-001.txt"
+        rows[0]["capture_sha256"] = "a" * 64
+        validate_observations(rows)
+
+    def test_unknown_collection_method_is_rejected(self) -> None:
+        rows = copy.deepcopy(self.baseline)
+        rows[0]["collection_method"] = "browser-magic"
+        with self.assertRaisesRegex(EvidenceError, "collection_method"):
+            validate_observations(rows)
+
+    def test_capture_hash_is_validated_without_collection_method(self) -> None:
+        rows = copy.deepcopy(self.baseline)
+        rows[0]["capture_sha256"] = "not-a-hash"
+        with self.assertRaisesRegex(EvidenceError, "capture_sha256"):
+            validate_observations(rows)
+
+    def test_previous_1_2_bundle_remains_readable(self) -> None:
+        payload = json.loads(
+            (ROOT / "examples" / "evidence-sample.json").read_text(encoding="utf-8")
+        )
+        payload["schema_version"] = "1.2.0"
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "previous.json"
+            path.write_text(json.dumps(payload), encoding="utf-8")
+            rows, metadata = load_bundle(path)
+        self.assertEqual(metadata["schema_version"], "1.2.0")
+        self.assertEqual(len(rows), len(payload["observations"]))
+
     def test_invalid_bundle_shape_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "bad.json"
@@ -105,7 +138,7 @@ class OutcomeScorecardTests(unittest.TestCase):
             "example-study",
             "Synthetic import check",
         )
-        self.assertEqual(bundle["schema_version"], "1.2.0")
+        self.assertEqual(bundle["schema_version"], "1.3.0")
         self.assertEqual(len(bundle["input_sha256"]), 64)
 
     def test_csv_import_rejects_unknown_columns(self) -> None:

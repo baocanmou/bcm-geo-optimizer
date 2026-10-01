@@ -24,6 +24,8 @@ Each AI-answer observation must contain:
 | `source_urls` | URLs actually shown in the answer |
 | `evidence_excerpt` | Short excerpt supporting the assigned state |
 | `capture_ref` | Optional local or governed evidence reference |
+| `collection_method` | Optional: `manual`, `authorized-browser`, `official-api`, or `public-web` |
+| `capture_sha256` | SHA-256 of the untouched governed capture; required for `authorized-browser` |
 | `limitations` | Known collection or interpretation limits |
 
 Allowed `status` values:
@@ -69,3 +71,10 @@ Use the strongest supportable wording:
 ## Storage and privacy
 
 Store credentials separately from evidence. Redact personal data, session data, internal URLs, and sensitive customer identifiers before sharing or publishing. Give captures a retention policy and access scope.
+
+For `authorized-browser`, `capture_ref` and `capture_sha256` are mandatory. The
+capture may be a governed screenshot, sanitized answer export, or deterministic
+text receipt. It must not be a cookie store, browser profile, session dump, or
+credential-bearing network log. The hash proves file integrity only; it does not
+prove that the answer is representative, stable, independent of personalization,
+or caused by a GEO change.
