@@ -6,7 +6,7 @@
   "type": "object",
   "required": ["schema_version", "methodology", "claims"],
   "properties": {
-    "schema_version": {"const": "1.3.0"},
+    "schema_version": {"const": "1.4.0"},
     "methodology": {"$ref": "#/$defs/methodology"},
     "claims": {
       "type": "array",

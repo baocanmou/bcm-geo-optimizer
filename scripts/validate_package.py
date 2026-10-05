@@ -15,6 +15,7 @@ REQUIRED = [
     "SKILL.md",
     "README.md",
     "README.zh-CN.md",
+    "PROMPT.md",
     "LICENSE",
     "NOTICE",
     "SECURITY.md",

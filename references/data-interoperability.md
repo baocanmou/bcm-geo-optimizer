@@ -17,9 +17,11 @@ Required columns:
 
 `observation_id,panel_version,prompt_id,prompt_hash,provider,model,locale,region,observed_at,status,brand,source_urls,evidence_excerpt,limitations`
 
-Optional column:
+Optional columns:
 
-`capture_ref`
+`capture_ref,collection_method,capture_sha256`
+
+Use `collection_method=manual` for answers the user asked and pasted back.
 
 Use `|` between multiple source URLs. Do not put the prompt text, answer body, cookies, tokens, user profiles, or raw browser captures in this transport format.
 

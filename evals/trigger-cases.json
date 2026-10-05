@@ -1,6 +1,6 @@
 {
   "skill": "bcm-geo-optimizer",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "should_trigger": [
     "Audit why my company is not recommended by ChatGPT and produce an evidence-backed GEO plan.",
     "比较改版前后 Perplexity 对我们品牌的引用率，不能夸大结果。",
@@ -10,7 +10,9 @@
     "Verify whether our URL submissions led to indexing, ranking, citations, or recommendations.",
     "Import our AI answer spreadsheet, validate it, and create a de-identified evidence package for a public case study.",
     "Plan entity, evidence, schema, content, and third-party corroboration work for AI search visibility.",
-    "Validate whether our GEO case-study conclusion has enough evidence to publish."
+    "Validate whether our GEO case-study conclusion has enough evidence to publish.",
+    "豆包和 DeepSeek 里搜不到我的品牌，帮我做一轮 AI 搜索优化。",
+    "帮我设计一组固定问题，在 Kimi、腾讯元宝、通义千问和文心里建立品牌推荐基线。"
   ],
   "should_not_trigger": [
     "Translate this paragraph into English.",

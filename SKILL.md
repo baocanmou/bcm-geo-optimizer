@@ -1,9 +1,9 @@
 ---
 name: bcm-geo-optimizer
-description: Outcome-first Generative Engine Optimization (GEO) and SEO workflow for improving real brand mentions, citations, recommendations, search visibility, and attributable conversions across AI assistants and search engines. Use when auditing or optimizing websites for ChatGPT, Claude, Gemini, Perplexity, Copilot, Google AI Overviews, Baidu, Bing, Google Search, or other answer/search systems; when measuring AI recommendation visibility; when planning llms.txt, structured data, entity, content, citation, indexing, or multi-site work; or when proving whether GEO changes produced externally observable results.
+description: Outcome-first Generative Engine Optimization (GEO) and SEO workflow for improving real brand mentions, citations, recommendations, search visibility, and attributable conversions across AI assistants and search engines. Use when auditing or optimizing websites for ChatGPT, Claude, Gemini, Perplexity, Copilot, Google AI Overviews, Doubao, DeepSeek, Kimi, Yuanbao, Qwen, ERNIE, Baidu, Bing, Google Search, or other answer/search systems; when measuring AI recommendation visibility; when planning llms.txt, structured data, entity, content, citation, indexing, or multi-site work; or when proving whether GEO changes produced externally observable results. 中文触发：GEO、AI 搜索优化、生成式引擎优化、豆包/DeepSeek/Kimi/元宝/千问/文心里搜不到或不推荐我的品牌、AI 回答里怎么被提及和引用、复测 GEO 优化效果。
 license: MIT
 metadata:
-  version: 1.3.0
+  version: 1.4.0
   author: BaoCanMou / 南昌包参谋品牌策划有限公司
   category: marketing
   tags:
@@ -80,6 +80,12 @@ evidence bundle. Use the least-privilege procedure in
 [references/browser-observation.md](references/browser-observation.md). Browser
 automation proves an observation was captured, not that the provider has stable
 behavior or that an optimization caused it.
+
+When the host has no browser automation tool, or the provider cannot be automated
+within its terms, give the user the frozen prompts, ask them to run each one in
+the named AI assistant and paste back the complete answer with every source link
+shown, and record those observations as `collection_method=manual`. Doubao,
+DeepSeek, Kimi, Yuanbao, Qwen and ERNIE consumer apps are usually observed this way.
 
 Do not compare baseline and retest when the prompt panel, locale, or provider coverage changed materially. See [references/evidence-contract.md](references/evidence-contract.md).
 
@@ -172,31 +178,36 @@ After a credible discovery/indexing window:
 
 Classify every headline conclusion as `implementation`, `search_outcome`, `ai_outcome`, `observed_change`, or `causal_estimate`. Implementation receipts cannot substantiate an AI/search outcome; change claims require a matched comparison; causal estimates require an explicit causal design. Run the outcome-claim gate before publishing a case study or executive result.
 
-Use the deterministic scripts:
+Use the deterministic scripts. They live in this skill's `scripts/` directory; when the current
+working directory is not the skill directory, run them by full path (for example
+`python3 <skill-dir>/scripts/geo_outcome_scorecard.py`) and replace the bundled `examples/...`
+inputs with the user's own files. Write outputs to `./geo-output/` under the current working
+directory; the scripts create it when missing, and the relative path also works on Windows
+(use `python` when `python3` is unavailable).
 
 ```bash
 python3 scripts/geo_outcome_scorecard.py \
   --input examples/evidence-sample.json \
-  --output /tmp/geo-scorecard.json
+  --output ./geo-output/geo-scorecard.json
 
 python3 scripts/geo_delta_compare.py \
   --baseline examples/evidence-baseline.json \
   --retest examples/evidence-retest.json \
-  --output /tmp/geo-delta.json
+  --output ./geo-output/geo-delta.json
 
 python3 scripts/geo_action_prioritizer.py \
   --input examples/actions-sample.json \
-  --output /tmp/geo-action-queue.json
+  --output ./geo-output/geo-action-queue.json
 
 python3 scripts/geo_csv_import.py \
   --input examples/evidence-sample.csv \
   --study-id example-study \
   --purpose "Synthetic import check" \
-  --output /tmp/geo-evidence.json
+  --output ./geo-output/geo-evidence.json
 
 python3 scripts/geo_claim_gate.py \
   --input examples/outcome-claims-sample.json \
-  --output /tmp/geo-claim-gate.json \
+  --output ./geo-output/geo-claim-gate.json \
   --strict
 ```
 

@@ -138,7 +138,7 @@ class OutcomeScorecardTests(unittest.TestCase):
             "example-study",
             "Synthetic import check",
         )
-        self.assertEqual(bundle["schema_version"], "1.3.0")
+        self.assertEqual(bundle["schema_version"], "1.4.0")
         self.assertEqual(len(bundle["input_sha256"]), 64)
 
     def test_csv_import_rejects_unknown_columns(self) -> None:

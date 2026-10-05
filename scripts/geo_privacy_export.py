@@ -20,7 +20,7 @@ from typing import Any
 from geo_outcome_scorecard import EvidenceError, load_bundle, validate_observations
 
 
-SCHEMA_VERSION = "1.3.0"
+SCHEMA_VERSION = "1.4.0"
 METHODOLOGY = {
     "id": "bcm-geo-evidence-action-retest",
     "version": "1.0.0",

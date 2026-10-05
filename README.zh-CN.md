@@ -7,12 +7,12 @@
 **简体中文** · [English](README.md)
 
 [![CI](https://github.com/baocanmou/bcm-geo-optimizer/actions/workflows/ci.yml/badge.svg)](https://github.com/baocanmou/bcm-geo-optimizer/actions/workflows/ci.yml)
-[![Version](https://img.shields.io/badge/version-1.3.0-2563eb)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.4.0-2563eb)](VERSION)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Zero dependencies](https://img.shields.io/badge/runtime-dependencies-0-16a34a)](scripts)
 [![Gitee 镜像](https://img.shields.io/badge/Gitee-国内镜像-c71d23)](https://gitee.com/baocanmou/bcm-geo-optimizer)
 
-一个给 Codex、Claude Code 等 AI 编程助手用的 GEO（生成式引擎优化）Skill：帮品牌方、运营和代理团队查清品牌在 AI 回答与搜索结果里到底有没有被提及、引用、推荐，把这些观察记录变成按证据排序的改进任务，并在同一组问题上复查前后变化。
+一个 GEO（生成式引擎优化）Skill，Claude Code、Codex、Kimi Code CLI、通义千问 Qwen Code、文心快码、TRAE、豆包/扣子都能装，不能装技能的聊天窗口也有一份聊天版提示词：帮品牌方、运营和代理团队查清品牌在 AI 回答与搜索结果里到底有没有被提及、引用、推荐，把这些观察记录变成按证据排序的改进任务，并在同一组问题上复查前后变化。
 
 它要回答的问题只有一个：
 
@@ -21,7 +21,7 @@
 ## 适合谁、什么时候用
 
 - **网站做了 `llms.txt`、结构化数据、提交收录，AI 还是不推荐**：先找出真正卡住的那一层，再决定改什么。
-- **准备做一轮 GEO 优化**：先在 ChatGPT、Gemini、Perplexity、Google、Bing、百度等平台上用固定问题建立基线，再排 30/60/90 天的任务。
+- **准备做一轮 GEO 优化**：先在豆包、DeepSeek、Kimi、腾讯元宝、通义千问、文心、百度，以及 ChatGPT、Gemini、Perplexity、Google、Bing 等平台上用固定问题建立基线，再排 30/60/90 天的任务。
 - **改版或发稿后想知道有没有变化**：用同一组提示词复查，只比较匹配的样本，变化和因果分开说。
 - **要对客户或老板汇报 GEO 结果、写案例**：发布前先过一遍结论闸门，确认每条结论的证据够不够。
 
@@ -44,6 +44,7 @@
 - **多站点治理**：一个商业意图只指定一个首选站点和页面，避免自家网站互相抢词。
 - **多语言诊断**：中文等语言按本地化规则评估，不把英文词数、大写率当通用标准。
 - **授权浏览器证据**（v1.3.0）：在你授权的已登录浏览器里采集 AI 回答时，必须记录采集方式、证据引用和原始文件 SHA-256；遇到验证码、登录、提交、上传、账号设置立即交还给你。
+- **国产 AI 与聊天版**（v1.4.0）：平台对照表补上豆包、DeepSeek、Kimi、腾讯元宝、通义千问、文心，查不到官方说明的属性标“待核实”；没有浏览器工具时，请你在各 AI 里提问并把完整回答贴回来，记为手工采集；不能装技能的聊天窗口可以用 [PROMPT.md](PROMPT.md)。
 - **离线脚本**：6 个确定性 Python 脚本，只用标准库，不需要密钥，不发网络请求。
 
 ## 效果示例
@@ -65,7 +66,7 @@
 python3 scripts/geo_delta_compare.py \
   --baseline examples/evidence-baseline.json \
   --retest examples/evidence-retest.json \
-  --output /tmp/geo-delta.json
+  --output ./geo-output/geo-delta.json
 ```
 
 ## 工作流程
@@ -74,31 +75,33 @@ python3 scripts/geo_delta_compare.py \
 
 ## 安装
 
-把仓库克隆到共享技能目录：
+这是标准格式的 AI Skill（`SKILL.md`），国内外常用的 AI 工具都能用。按你用的工具选一种：
+
+| 你用的工具 | 安装方法 |
+|---|---|
+| Claude Code | `git clone https://github.com/baocanmou/bcm-geo-optimizer.git ~/.claude/skills/bcm-geo-optimizer` |
+| Codex、Kimi Code CLI、文心快码 Comate | `git clone https://github.com/baocanmou/bcm-geo-optimizer.git ~/.agents/skills/bcm-geo-optimizer` |
+| 通义千问 Qwen Code | `git clone https://github.com/baocanmou/bcm-geo-optimizer.git ~/.qwen/skills/bcm-geo-optimizer` |
+| TRAE | `git clone https://github.com/baocanmou/bcm-geo-optimizer.git ~/.trae/skills/bcm-geo-optimizer` |
+| 豆包、扣子 | 从 [Releases](https://github.com/baocanmou/bcm-geo-optimizer/releases/latest) 下载 `bcm-geo-optimizer-skill-v版本号.zip`，在“技能”页上传 |
+| DeepSeek、Kimi、豆包、通义千问、文心、腾讯元宝的聊天窗口 | 打开 [PROMPT.md](PROMPT.md)，复制全文作为第一条消息发出（也可以作为附件上传），再介绍你的品牌和网站 |
+
+- GitHub 打不开时，把地址换成国内镜像 `https://gitee.com/baocanmou/bcm-geo-optimizer.git`。
+- Windows 下把 `~` 换成 `%USERPROFILE%`。
+- Kimi Code CLI 也读取 `~/.kimi-code/skills`；文心快码也读取项目里的 `.agents/skills`、`.comate/skills` 和 `~/.comate/skills`。各工具的技能目录可能调整，以它们的最新文档为准。
+- 聊天版只能当“GEO 方法顾问”：定目标、设计提问面板、解读你贴回来的回答、排行动优先级；做不到实际观测、复测统计和结论闸门，这些要用技能版。
+
+### 多个工具共用一份
+
+已经把仓库克隆到 `~/.agents/skills/bcm-geo-optimizer` 的，可以用链接让其他工具读同一份，更新时只需 `git pull` 一次：
 
 ```bash
-git clone https://github.com/baocanmou/bcm-geo-optimizer.git \
-  "$HOME/.agents/skills/bcm-geo-optimizer"
-```
-
-国内网络访问 GitHub 较慢时，可以改用 Gitee 镜像：
-
-```bash
-git clone https://gitee.com/baocanmou/bcm-geo-optimizer.git \
-  "$HOME/.agents/skills/bcm-geo-optimizer"
-```
-
-**Codex**：如果 Codex 使用独立技能目录，链接共享副本：
-
-```bash
+# Codex 使用独立技能目录时
 mkdir -p "$HOME/.codex/skills"
 ln -s "$HOME/.agents/skills/bcm-geo-optimizer" \
   "$HOME/.codex/skills/bcm-geo-optimizer"
-```
 
-**Claude Code**：Claude Code 从 `~/.claude/skills/` 读取个人技能，同样用链接：
-
-```bash
+# Claude Code 从 ~/.claude/skills/ 读取个人技能
 mkdir -p "$HOME/.claude/skills"
 ln -s "$HOME/.agents/skills/bcm-geo-optimizer" \
   "$HOME/.claude/skills/bcm-geo-optimizer"
@@ -127,7 +130,7 @@ AI 推荐基线；遇到验证码、提交、上传或账号设置立即交还�
 
 助手会先确认商业目标和提示词面板，再诊断限制层，最后交付一份报告：业务目标与范围、各平台已验证状态、基线面板与覆盖缺口、主要卡点、30/60/90 天行动、发布状态（如有授权）、复查结果、下一步决策。状态统一用 `Verified`、`Received`、`Configured`、`Inferred`、`Unknown`、`Blocked` 标注。
 
-浏览器采集流程见[授权浏览器观察](references/browser-observation.md)。
+浏览器采集流程见[授权浏览器观察](references/browser-observation.md)。没有浏览器工具时（豆包、DeepSeek 等国产 App 通常如此），助手会把固定问题交给你，请你逐条提问并把完整回答和来源链接贴回来，记为 `collection_method: manual`。各平台的已核实属性见[平台对照表](references/engine-matrix.md)。
 
 ### 离线证据工具
 
@@ -140,35 +143,37 @@ AI 推荐基线；遇到验证码、提交、上传或账号设置立即交还�
 | `geo_privacy_export.py` | 生成去标识化的复核副本 |
 | `geo_claim_gate.py` | 对外发布前检查结论的证据门槛 |
 
+脚本在本技能目录的 `scripts/` 下。下面的命令在技能目录里运行；当前目录不是技能目录时，用完整路径运行（例如 `python3 ~/.agents/skills/bcm-geo-optimizer/scripts/geo_outcome_scorecard.py`），并把 `examples/...` 换成你自己的文件。结果写到当前目录下的 `./geo-output/`，目录不存在时脚本会自动创建，Windows 也能用（没有 `python3` 时用 `python`）。
+
 ```bash
 # 结果记分卡
 python3 scripts/geo_outcome_scorecard.py \
   --input examples/evidence-sample.json \
-  --output /tmp/geo-scorecard.json
+  --output ./geo-output/geo-scorecard.json
 
 # 行动队列
 python3 scripts/geo_action_prioritizer.py \
   --input examples/actions-sample.json \
-  --output /tmp/geo-action-queue.json
+  --output ./geo-output/geo-action-queue.json
 
 # 表格导入
 python3 scripts/geo_csv_import.py \
   --input examples/evidence-sample.csv \
   --study-id example-study \
   --purpose "合成数据导入检查" \
-  --output /tmp/geo-evidence.json
+  --output ./geo-output/geo-evidence.json
 
 # 去标识化副本（盐值至少 16 字节，不要写进仓库）
 export GEO_ANONYMIZATION_SALT='使用至少16字节且不得入库的随机值'
 python3 scripts/geo_privacy_export.py \
-  --input /tmp/geo-evidence.json \
+  --input ./geo-output/geo-evidence.json \
   --time-granularity day \
-  --output /tmp/geo-evidence-public.json
+  --output ./geo-output/geo-evidence-public.json
 
 # 结论闸门
 python3 scripts/geo_claim_gate.py \
   --input examples/outcome-claims-sample.json \
-  --output /tmp/geo-claim-gate.json \
+  --output ./geo-output/geo-claim-gate.json \
   --strict
 ```
 
@@ -193,7 +198,7 @@ python3 scripts/geo_claim_gate.py \
 这些只证明“已实施”，不证明 AI 用了它们。Skill 会先诊断限制层，可能卡在收录、实体信息不一致、页面缺少可引用的证据，或缺少独立佐证。`llms.txt` 和 schema 不会被自动排成高优先级。
 
 **脚本会自己去问 ChatGPT 或抓搜索结果吗？**
-不会。脚本完全离线、不需要密钥、不发网络请求。观察记录由你手工收集、从平台导出，或在你授权的浏览器会话里采集。
+不会。脚本完全离线、不需要密钥、不发网络请求。观察记录由你手工收集（在各 AI 里提问后把完整回答贴回来）、从平台导出，或在你授权的浏览器会话里采集。
 
 **复查数字变好了，能说是优化带来的吗？**
 只能说“在匹配面板中观察到变化”。因果估计要有明确的因果设计、对照参照和假设说明。发布前用 `geo_claim_gate.py` 检查，类型为 `causal_estimate` 但没有设计的结论会被驳回。
@@ -206,7 +211,7 @@ python3 scripts/geo_claim_gate.py \
 
 ## 版本与更新
 
-当前版本：**1.3.0**（2026-09-07），新增授权浏览器观察规范：采集方式与证据哈希校验，且浏览器执行成功不算结果证据。
+当前版本：**1.4.0**（2026-10-05），支持国产大模型环境：按工具列出安装方法（含 Kimi Code CLI、Qwen Code、文心快码、TRAE、豆包/扣子），平台对照表补上豆包、DeepSeek、Kimi、腾讯元宝、通义千问、文心，新增手工贴回的采集方式和聊天版 [PROMPT.md](PROMPT.md)，脚本输出改到当前目录下的 `./geo-output/`。
 
 - 更新记录：[CHANGELOG.md](CHANGELOG.md)
 - 发布版本：[GitHub Releases](https://github.com/baocanmou/bcm-geo-optimizer/releases)

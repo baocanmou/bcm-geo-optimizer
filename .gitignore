@@ -10,3 +10,6 @@ build/
 *.tar.gz
 .env
 .env.*
+
+# Local script outputs
+geo-output/
